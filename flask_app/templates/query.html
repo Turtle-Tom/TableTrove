@@ -1,0 +1,39 @@
+{% extends "header.html" %}
+{% block content %}
+{% if error_msg %}
+    <p>{{ error_msg }}</p>
+{% endif %}
+
+<div class="container-fluid">
+    {% for item in item_results %}
+    <div class="media">
+        <div class="media-body">
+        <h5 class="mt-0">
+            <a href="{{ url_for('item_detail', item_id=item.item_id) }}">
+                {{ item.name }}
+            </a> 
+            {{ " - Created by: " + item.creator.username }}
+            <small>({{ item.date }})</small>
+        </h5>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="container-fluid">
+    {% for creature in creature_results %}
+    <div class="media">
+        <div class="media-body">
+        <h5 class="mt-0">
+            <a href="{{ url_for('creature_detail', creature_id=creature.creature_id) }}">
+                {{ creature.name }}
+            </a> 
+            {{ " - Created by: " + creature.creator.username }}
+            <small>({{ creature.date }})</small>
+        </h5>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

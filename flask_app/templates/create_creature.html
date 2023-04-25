@@ -1,0 +1,61 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        {# Profile picture #}
+        <img class="propic" src="data:image/png;base64,{{image}}" alt="image">
+    </div>
+    <div class="col">
+        {# Greeting #}
+        <h1>Create a new Creature!</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        {# Creature Creation Form #}
+        {% if current_user.is_authenticated %}
+            <div class="row">
+            <div class="col">
+                <form method="POST" action="">
+                {{ creature_form.csrf_token }}
+                <div class="form-group">
+                    {{ creature_form.name.label }}
+                    {{ creature_form.name(class="form-control") }}
+
+                    {% if creature_form.name.errors %}
+                        <div class="alert alert-warning" role="alert">
+                        {% for error in creature_form.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {{ creature_form.content.label }}
+                    {{ creature_form.content(class="form-control") }}
+
+                    {% if creature_form.content.errors %}
+                        <div class="alert alert-warning" role="alert">
+                        {% for error in creature_form.content.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            <p>{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+
+                </div>
+                {{ creature_form.submit() }}
+                </form>
+            </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

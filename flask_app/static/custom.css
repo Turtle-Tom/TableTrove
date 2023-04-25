@@ -1,0 +1,41 @@
+movie {
+    max-width: 80;
+    padding: 1; 
+}
+
+.card-body > img {
+    max-width: 200;
+}
+
+.media-list {
+    border-top: 1px dashed rgb(141, 118, 84);
+}
+
+.review-item {
+    border-bottom: 1px dashed #614c2b;
+}
+
+.propic {
+    max-width: 50%;
+}
+
+.comment-pic {
+    max-width: 64px;
+}
+
+.head-color {
+    background-color: rgb(156, 134, 102);
+}
+
+.card-margin {
+    margin: 20px;
+}
+
+.site-color {
+    background-color: rgb(215, 192, 158);
+}
+
+.font {
+    font-family: fantasy;
+    font-weight: bold;
+}

@@ -1,0 +1,144 @@
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script> 
+{% extends "header.html" %}
+{% block content %}
+
+<br>
+
+<div class="row">
+    <div class="col">
+        {# Display any error messages #}
+        {% if error_msg %}
+            <b>{{ error_msg }}</b>
+        {% endif %}
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col text-center">
+        {# Indicate which user's details we're looking at #}
+        <h1> {{ username }} </h1>
+    </div>
+</div>
+
+<br>
+
+<div class="row" style="height: 350px;">
+    {############## Profile Picture ##############}
+    <div class="col">
+        {# User's Profile Picture #}
+        <img class="propic" src="data:image/png;base64,{{ image }}" alt="image">
+    </div>
+    {############## Statistics bar chart ##############}
+    <div class="col">
+        {{ plot|safe }}
+    </div>
+</div>
+
+<br>
+
+{############## Items created ##############}
+
+<div class="row">
+    <div class="col">
+        {# Show all items made by the user #}
+        <h1> Created Items <small class="float-right">{{ items|length }} items</small></h1>
+        <ul class="media-list">
+            {% for item in items %}
+                <li class="media review-item">
+                    <div class="media-body">
+                    <span class="float-right">
+                        <small>{{ item.date }}</small>
+                    </span>
+                    <a href="{{ url_for('item_detail', item_id=item.item_id) }}">
+                        <strong>@{{ item.name }}</strong>
+                    </a>
+                    <p>
+                        {{ item.content }}
+                    </p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{############## Item comments ##############}
+
+<div class="row">
+    <div class="col">
+        {# Show all item comments made by the user #}
+        <h2> Item Comments <small class="float-right">{{ item_comments|length }} item comments</small></h2>
+        <ul class="media-list">
+            {% for comment in item_comments %}
+                <li class="media review-item">
+                    <div class="media-body">
+                    <span class="float-right">
+                        <small>{{ comment.date }}</small>
+                    </span>
+                    <a href="{{ url_for('item_detail', item_id=comment.item_id) }}">
+                        <strong>@{{ comment.item_id }}</strong>
+                    </a>
+                    <p>
+                        {{ comment.content }}
+                    </p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{############## Creatures created ##############}
+
+<div class="row">
+    <div class="col">
+        {# Show all creatures made by the user #}
+        <h1> Created Creatures <small class="float-right">{{ creatures|length }} creatures</small></h1>
+        <ul class="media-list">
+            {% for creature in creatures %}
+                <li class="media review-item">
+                    <div class="media-body">
+                    <span class="float-right">
+                        <small>{{ creature.date }}</small>
+                    </span>
+                    <a href="{{ url_for('creature_detail', creature_id=creature.creature_id) }}">
+                        <strong>@{{ creature.name }}</strong>
+                    </a>
+                    <p>
+                        {{ creature.content }}
+                    </p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{############## Creatures comments ##############}
+
+<div class="row">
+    <div class="col">
+        {# Show all creature comments made by the user #}
+        <h2> Creature Comments <small class="float-right">{{ creature_comments|length }} creature comments</small></h2>
+        <ul class="media-list">
+            {% for comment in creature_comments %}
+                <li class="media review-item">
+                    <div class="media-body">
+                    <span class="float-right">
+                        <small>{{ comment.date }}</small>
+                    </span>
+                    <a href="{{ url_for('creature_detail', creature_id=comment.creature_id) }}">
+                        <strong>@{{ comment.creature_id }}</strong>
+                    </a>
+                    <p>
+                        {{ comment.content }}
+                    </p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

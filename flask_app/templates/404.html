@@ -1,0 +1,15 @@
+{% extends "header.html" %}
+{% block content %}
+
+{% if error_msg %}
+<b>{{ error_msg }}</b>
+{% endif %}
+<div class="row">
+    <div class="col">
+        <a href="{{ url_for('index') }}">
+            <strong>Rolled a Nat 1</strong>
+          </a>
+    </div>
+</div>
+
+{% endblock content %}

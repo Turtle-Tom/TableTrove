@@ -1,0 +1,100 @@
+{% extends "header.html" %}
+{% block content %}
+
+<br>
+
+<div class="row">
+    <div class="col">
+        <form action="/" class="form-inline my-2 my-lg-0" method="POST">
+            {{ form.csrf_token }}
+            {{ form.search_query(class="form-control", placeholder="Search") }}
+
+            {% if form.search_query.errors %}
+            <div class="alert alert-warning" role="alert">
+                {% for error in form.search_query.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {{ form.submit(class="btn btn-outline-success") }}
+        </form>
+        <br>
+        <h3>Search for D&D Content! </h3>
+    </div>
+        <br>
+    <div class="col text-right">
+        <a href="{{ url_for('about') }}">About</a>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col text-center">
+    <a href="{{ url_for('create_item') }}">
+        <h3>Create an Item</h3>
+      </a>
+    </div>
+    <div class="col text-center">
+    <a href="{{ url_for('create_creature') }}">
+        <h3>Create a Creature</h3>
+      </a>
+    </div>
+</div>
+
+<br>
+<br>
+
+<div class="row">
+    <div class="col text-center">
+        <h1>Featured Content</h1>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col">
+      <div class="card text-center">
+        <div class="card-header">
+            <a href="{{ url_for('item_detail', item_id=top_item.item_id) }}">
+                <h1>{{ top_item.name }}</h1>
+            </a>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><b>Created by:</b> 
+              <a href="{{ url_for('user_detail', username=top_item.creator.username) }}">
+              {{ top_item.creator.username }}</a>
+            </li>
+            <li class="list-group-item"><b>Date Created:</b> {{ top_item.date }}</li>
+            <li class="list-group-item"><b>Item Description:</b> {{ top_item.content }}</li>
+            <li class="list-group-item"><b>♥</b> {{ top_item.likes }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+        <div class="card text-center">
+            <div class="card-header">
+                <a href="{{ url_for('creature_detail', creature_id=top_creature.creature_id) }}">
+                    <h1>{{ top_creature.name }}</h1>
+                </a>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>Created by:</b> 
+                        <a href="{{ url_for('user_detail', username=top_creature.creator.username) }}">
+                        {{ top_creature.creator.username }}</a>
+                    </li>
+                    <li class="list-group-item"><b>Date Created:</b> {{ top_creature.date }}</li>
+                    <li class="list-group-item"><b>Creature Description:</b> {{ top_creature.content }}</li>
+                    <li class="list-group-item"><b>♥</b> {{ top_creature.likes }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
